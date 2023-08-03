@@ -1,20 +1,19 @@
-const connectToMango = require('./db')
-const mongoose = require('mongoose');
+const connectToMongo = require('./db');
 const express = require('express')
+var cors = require('cors') 
 
-connectToMango();
-const app = express();
-const port = 5000;
+connectToMongo();
+const app = express()
+const port = 5000
 
-// app.get('/', (req, res) => {
-//   res.send('Hello Shyam ji!')
-// })
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
 
-app.use('/api/auth',require('./routes/auth'))
-app.use('/api/notes',require('./routes/auth'))
+// Available Routes
+app.use('/api/auth', require('./routes/auth'))
+app.use('/api/notes', require('./routes/notes'))
 
 
 app.listen(port, () => {
-  console.log(`listening on port ${port}`)
+  console.log(`iNotebook backend listening at http://localhost:${port}`)
 })
